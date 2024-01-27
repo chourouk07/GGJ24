@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "Input_Manager",
     "maps": [
         {
             "name": "Player",
@@ -18,6 +18,24 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "e9c37ffb-2fa4-46fc-a0ac-fbab8e682419",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "e7d9f728-d83e-4c9f-87ae-fdd2f2e84709",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "4b2d8daf-8412-4850-96e6-d53ab99b091f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -88,6 +106,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a15fa3b7-82fe-4d2b-b4c2-b05a8d179b13",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb4dc4f3-96d8-49ab-bfae-a11118adeca8",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     #region References
     Input_Manager _playerInput;
     CharacterController _characterController;
-    [SerializeField] Animator _animator;
+    //[SerializeField] Animator _animator;
     #endregion
     #region player movement variables
     Vector2 _movementInput;
@@ -25,6 +25,17 @@ public class PlayerController : MonoBehaviour
     bool _isjumpAnimation = false;
     bool _canDoubleJump;
 
+    //Dashing
+    bool _isDashPressed = false;
+    bool _isDashing = false;
+    Vector3 _movementDirection; 
+    [SerializeField] float _dashDuration = 0.5f;
+    [SerializeField] float _dashSpeed = 100f;
+    bool _canDash = false;
+    //crouching
+    bool _isCrouchingPressed = false;
+    Vector3 _crouchScale = new Vector3(1, 0.5f, 1);
+    Vector3 _playerScale = new Vector3(1, 1, 1);
     #endregion
     /*#region Animation hashs
     int _isWalkingHash;
@@ -42,20 +53,31 @@ public class PlayerController : MonoBehaviour
         _playerInput.Player.Move.performed += OnMovementInput;
         _playerInput.Player.Jump.started += OnJump;
         _playerInput.Player.Jump.canceled += OnJump;
+        _playerInput.Player.Dash.started += OnDash;
+        _playerInput.Player.Dash.canceled += OnDash;
+        _playerInput.Player.Crouch.started += OnCrouch;
+        _playerInput.Player.Crouch.canceled += OnCrouch;
         /*//animation hash
         _isWalkingHash = Animator.StringToHash("isWalking");
         _isRunningHash = Animator.StringToHash("isRunning");
         _isJumpingHash = Animator.StringToHash("isJumping");
         _isDoubleJumpingHash = Animator.StringToHash("isDoubleJumping");*/
+        _canDash = true;
     }
 
-
+    void OnCrouch(InputAction.CallbackContext ctx)
+    {
+        _isCrouchingPressed = ctx.ReadValueAsButton();
+    }
 
     void OnJump(InputAction.CallbackContext ctx)
     {
         _isJumpPressed = ctx.ReadValueAsButton();
     }
-
+    void OnDash(InputAction.CallbackContext ctx)
+    {
+        _isDashPressed= ctx.ReadValueAsButton();
+    }
     void HandleRotation()
     {
         Vector3 lookAtDirection;
@@ -163,7 +185,30 @@ public class PlayerController : MonoBehaviour
             _isJumping = false;
         }
     }
-
+    IEnumerator HandleDash()
+    {
+        _isDashing = true;
+        _movementDirection = transform.forward * _dashSpeed;
+        _characterController.Move(_movementDirection* Time.deltaTime);
+        yield return new WaitForSeconds(_dashDuration);
+        _isDashing = false;
+        _canDash = false;
+        yield return new WaitForSeconds(0.5f);
+        _canDash= true;
+    }
+    void HandleCrouch()
+    {
+      /*  if (_isCrouchingPressed)
+        {
+            _characterController.height = 0.5f;
+            _characterController.center = new Vector3(0, 0.5f / 2, 0);
+        }
+        else
+        {
+            _characterController.height = 1f;
+            _characterController.center = new Vector3(0, 2f / 2, 0);
+        }*/
+    }
 
     private void Update()
     {
@@ -171,7 +216,11 @@ public class PlayerController : MonoBehaviour
         //HandleAnimation();
 
          _characterController.Move(_movement * Time.deltaTime);
-        
+        if (_isDashPressed && _canDash)
+        {
+            StartCoroutine(HandleDash());
+        }
+        HandleCrouch();
 
         HandleGravity();
         HandleJump();

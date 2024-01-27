@@ -595,11 +595,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6dda7af5ecab1e4199d6671470be6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
   _movementSpeed: 5
-  _runSpeedMultiplier: 2
   RespawnPoint: {fileID: 0}
   _jumpHeight: 1.2
+  _dashDuration: 0.1
+  _dashSpeed: 58
 --- !u!143 &1582425528
 CharacterController:
   m_ObjectHideFlags: 0
