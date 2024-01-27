@@ -198,16 +198,16 @@ public class PlayerController : MonoBehaviour
     }
     void HandleCrouch()
     {
-      /*  if (_isCrouchingPressed)
+      if (_isCrouchingPressed)
         {
             _characterController.height = 0.5f;
-            _characterController.center = new Vector3(0, 0.5f / 2, 0);
+            //_characterController.center = new Vector3(0, 0.5f / 2, 0);
         }
         else
         {
-            _characterController.height = 1f;
-            _characterController.center = new Vector3(0, 2f / 2, 0);
-        }*/
+            _characterController.height = 2f;
+            //_characterController.center = new Vector3(0, 2f / 2, 0);
+        }
     }
 
     private void Update()
