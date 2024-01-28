@@ -15,6 +15,7 @@ public class bananaBehaviour : MonoBehaviour
     {
         //make banana always rotate randomly
         transform.Rotate(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
+        transform.position += new Vector3(0.1f, 0, 0);
     }
     //make this gameobject destroy itself if it hits something with enemy tag  
     void OnCollisionEnter(Collision collision)

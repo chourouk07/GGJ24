@@ -20,7 +20,7 @@ public class projectileLauncher : MonoBehaviour
     {
             GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * launchForce, ForceMode.VelocityChange);
+       // projectile.transform.Translate(Vector3.forward * Time.deltaTime * launchForce);
 
         Destroy(projectile, 2f);
     }
